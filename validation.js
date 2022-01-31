@@ -1,40 +1,42 @@
-import pkg from '@hapi/joi';
-const { object, string} = pkg;
+import Joi from '@hapi/joi';
 
 const registerValidation = (data) => {    
-    const schema = object({
-        name: string().min(6).max(20).required(),
-        email: string().min(6).required().email(),
-        password: string().min(6).max(1024).required(),
+    const schema = Joi.object({
+        name: Joi.string().min(6).max(20).required(),
+        email: Joi.string().min(6).required().email(),
+        password: Joi.string().min(6).max(1024).required(),
     });
     return schema.validate(data);
 }
 
 const loginValidation = (data) => {    
-    const schema = object({
-        email: string().min(6).required().email(),
-        password: string().min(6).max(1024).required(),
+    const schema = Joi.object({
+        email: Joi.string().min(6).required().email(),
+        password: Joi.string().min(6).max(1024).required(),
     });
     return schema.validate(data);
 }
 
 const colorValidation = (data) => {
-    const schema = object({
+    const schema = Joi.object({
         r: Joi.number().integer().required(),
         g: Joi.number().integer().required(),
         b: Joi.number().integer().required()
     })
+    return schema.validate(data);
 }
 
 const temperatureValidation = (data) => {
-    const schema = object({
+    const schema = Joi.object({
         t: Joi.number().integer().required()
     })
+    return schema.validate(data);
 }
 const brightnessValidation = (data) => {
-    const schema = object({
+    const schema = Joi.object({
         b: Joi.number().integer().required()
     })
+    return schema.validate(data);
 }
 
 

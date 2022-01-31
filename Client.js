@@ -1,37 +1,48 @@
 import Govee from "node-govee-led";
 
 class Client {
-    clinet = new Govee({
+    govee = new Govee({
         apiKey: process.env.API,
         mac: process.env.MAC,
         model: process.env.MODEL
     })
 
+    init() {
+        this.govee = new Govee({
+            apiKey: process.env.API,
+            mac: process.env.MAC,
+            model: process.env.MODEL
+        });
+        console.log(process.env.API);
+        this.turnOn();
+    }
+
     on = false;
 
     setColor(r, g, b) {
-        if(!on) this.turnOn();
+        if(!this.on) this.turnOn();
         const hexCode = "#" + r.toString(16) + g.toString(16) + b.toString(16);
-        clinet.setColor(hexCode);
+        console.log("Setting color to: " + hexCode);
+        this.govee.setColor(hexCode);
     }
     setBrightness(b) {
-        if(!on) this.turnOn();
-        clinet.setBrightness(b);
+        if(!this.on) this.turnOn();
+        this.govee.setBrightness(b);
     }
     setTemperature(t) {
-        if(!on) this.turnOn();
-        clinet.setTemperature(t);
+        if(!this.on) this.turnOn();
+        this.govee.setTemperature(t);
     }
     turnOn() {
-        client.turnOn();
-        on = true;
+        this.govee.turnOn();
+        this.on = true;
         setTimeout(() => {
-            on = false;
+            this.on = false;
         }, 30 * 1000);
     }
     turnOff() {
-        client.turnOff();
-        on = false;
+        this.govee.turnOff();
+        this.on = false;
     }
 }
 

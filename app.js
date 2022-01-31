@@ -4,7 +4,20 @@ import { config } from 'dotenv';
 import pkg from 'mongoose';
 const { connect } = pkg;
 
+import Govee from "node-govee-led";
+import client from "./Client.js";
+
 config();
+
+const GoveeClient = new Govee({
+	apiKey: process.env.API,
+	mac: "",
+	model: ""
+})
+
+GoveeClient.getDevices().then(data => console.log(data))
+client.init();
+client.govee.turnOff();
 
 // Import routes
 import authRoute from './routes/auth.js';
