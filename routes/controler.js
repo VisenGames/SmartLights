@@ -14,12 +14,12 @@ router.post('/color', verify, async (req, res) => {
 
 router.post('/on', verify, async (req, res) => {
     client.turnOn();
-    return res.status(200);
+    return res.status(200).json({});
 });
 
 router.post('/off', verify, async (req, res) => {
     client.turnOff();
-    return res.status(200);
+    return res.status(200).json({});
 });
 
 router.post('/temperature', verify, async (req, res) => {

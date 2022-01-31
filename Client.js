@@ -19,9 +19,15 @@ class Client {
 
     on = false;
 
+    toHex(n) {
+        const h = n.toString(16);
+        if(h.length == 1) return "0" + h;
+        return h;
+    }
+
     setColor(r, g, b) {
         if(!this.on) this.turnOn();
-        const hexCode = "#" + r.toString(16) + g.toString(16) + b.toString(16);
+        const hexCode = "#" + this.toHex(r) + this.toHex(g) + this.toHex(b);
         console.log("Setting color to: " + hexCode);
         this.govee.setColor(hexCode);
     }
