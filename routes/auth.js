@@ -1,8 +1,11 @@
-const router = require('express').Router();
-import User, { findOne } from '../models/User';
-import { registerValidation, loginValidation } from '../validation';
-import { genSalt, hash, compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
+import { Router } from 'express';
+const router = Router();
+import User from '../models/User.js';
+import { registerValidation, loginValidation } from '../validation.js';
+import pkg from 'bcryptjs';
+const { genSalt, hash, compare } = pkg;
+import pkgc from 'jsonwebtoken';
+const { sign } = pkgc;
 
 
 router.post('/register', async (req, res) => {
@@ -11,7 +14,7 @@ router.post('/register', async (req, res) => {
 
     if(error) return res.status(400).send(error.details[0].message);
 
-    const emailExists = await findOne({email: req.body.email});
+    const emailExists = await User.findOne({email: req.body.email});
     if(emailExists) return res.status(400).send('Email already exists!');
 
     const salt = await genSalt(10);
@@ -34,7 +37,7 @@ router.post('/login', async (req, res) => {
     const { error } = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const user = await findOne({email: req.body.email});
+    const user = await User.findOne({email: req.body.email});
     if(!user) return res.status(400).send('Account does not exist!');
 
     const validPass = await compare(req.body.password, user.password);

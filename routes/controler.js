@@ -1,7 +1,8 @@
-import client from "../Client";
-import { brightnessValidation, colorValidation, temperatureValidation } from "../validation";
-import router from "./auth";
-const verify = require('./verifyToken');
+import { Router } from 'express';
+const router = Router();
+import client from "../Client.js";
+import { brightnessValidation, colorValidation, temperatureValidation } from "../validation.js";
+import verify from './verifyToken.js';
 
 router.post('/color', verify, async (req, res) => {
     const { error } = colorValidation(req.body);
@@ -27,4 +28,4 @@ router.post('/brightness', verify, async (req, res) => {
     return res.status(200).json({b});
 });
 
-module.exports = router;
+export default router;

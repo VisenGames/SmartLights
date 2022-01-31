@@ -1,21 +1,22 @@
-const express = require('express');
+import express, { json } from 'express';
 const app = express(); 
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+import { config } from 'dotenv';
+import pkg from 'mongoose';
+const { connect } = pkg;
 
-dotenv.config();
+config();
 
 // Import routes
-const authRoute = require('./routes/auth');
-const controlRoute = require('./routes/controler');
+import authRoute from './routes/auth.js';
+import controlRoute from './routes/controler.js';
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECT, () => {
+connect(process.env.DB_CONNECT, () => {
     console.log('Connected to database!');
 })
 
 // Middleware
-app.use(express.json());
+app.use(json());
 // Routes Middleware
 app.use('/api/user', authRoute);
 app.use('/api/control', controlRoute);

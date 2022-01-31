@@ -1,5 +1,5 @@
-import { object, string } from '@hapi/joi';
-import { number } from 'joi';
+import pkg from '@hapi/joi';
+const { object, string} = pkg;
 
 const registerValidation = (data) => {    
     const schema = object({
@@ -20,20 +20,20 @@ const loginValidation = (data) => {
 
 const colorValidation = (data) => {
     const schema = object({
-        r: number(),
-        g: number(),
-        b: number()
+        r: Joi.number().integer().required(),
+        g: Joi.number().integer().required(),
+        b: Joi.number().integer().required()
     })
 }
 
 const temperatureValidation = (data) => {
     const schema = object({
-        t: number()
+        t: Joi.number().integer().required()
     })
 }
 const brightnessValidation = (data) => {
     const schema = object({
-        b: number()
+        b: Joi.number().integer().required()
     })
 }
 
