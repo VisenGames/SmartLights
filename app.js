@@ -3,6 +3,7 @@ const app = express();
 import { config } from 'dotenv';
 import pkg from 'mongoose';
 const { connect } = pkg;
+import cors from 'cors';
 
 import Govee from "node-govee-led";
 import client from "./Client.js";
@@ -30,6 +31,7 @@ connect(process.env.DB_CONNECT, () => {
 
 // Middleware
 app.use(json());
+app.use(cors());
 // Routes Middleware
 app.use('/api/user', authRoute);
 app.use('/api/control', controlRoute);
