@@ -34,7 +34,7 @@ router.post('/brightness', verify, async (req, res) => {
     const { error } = brightnessValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
     const {b} = req.body;
-    client.setTemperature(b);
+    client.setBrightness(b);
     return res.status(200).json({b});
 });
 

@@ -13,7 +13,6 @@ class Client {
             mac: process.env.MAC,
             model: process.env.MODEL
         });
-        console.log(process.env.API);
         this.turnOn();
     }
 
@@ -37,7 +36,7 @@ class Client {
     }
     setTemperature(t) {
         if(!this.on) this.turnOn();
-        this.govee.setTemperature(t);
+        this.govee.setColorTemperature(t);
     }
     turnOn() {
         this.govee.turnOn();

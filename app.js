@@ -1,10 +1,8 @@
 import express, { json } from 'express';
 const app = express(); 
 import { config } from 'dotenv';
-import pkg from 'mongoose';
-const { connect } = pkg;
+import mongoose from 'mongoose';
 import cors from 'cors';
-
 import Govee from "node-govee-led";
 import client from "./Client.js";
 
@@ -25,7 +23,7 @@ import authRoute from './routes/auth.js';
 import controlRoute from './routes/controler.js';
 
 // Connect to DB
-connect(process.env.DB_CONNECT, () => {
+mongoose.connect(process.env.DB_CONNECT, () => {
     console.log('Connected to database!');
 })
 
